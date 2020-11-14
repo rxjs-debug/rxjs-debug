@@ -1,0 +1,84 @@
+{
+  "name": "rxjs-debug",
+  "description": "Automated Visual RxJS Debugger",
+  "version": "0.0.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/dabalyan/rxjs-debug.git"
+  },
+  "homepage": "https://github.com/dabalyan/rxjs-debug.git",
+  "license": "MIT",
+  "author": "Ankit Singh <dabalyan@hotmail.com>",
+  "scripts": {
+    "ng": "ng",
+    "start": "ng serve",
+    "build": "npm run build:rxjs-debug && npm run build:app",
+    "build:app": "ng build app --prod",
+    "build:rxjs-debug": "ng build rxjs-debug && cp README.md dist/rxjs-debug && cp LICENSE dist/rxjs-debug",
+    "test:rxjs-debug": "ng test rxjs-debug --no-watch --no-progress --reporters=kjhtml --browsers=ChromeHeadlessCI",
+    "publish:rxjs-debug": "cd dist/rxjs-debug && npm publish --dry-run --ignore-scripts",
+    "lint": "ng lint",
+    "lint:rxjs-debug": "ng lint rxjs-debug",
+    "lint:app": "ng lint app",
+    "prettify": "prettier **/* --write",
+    "e2e": "ng e2e"
+  },
+  "private": true,
+  "dependencies": {
+    "@angular/animations": "~11.0.0",
+    "@angular/common": "~11.0.0",
+    "@angular/compiler": "~11.0.0",
+    "@angular/core": "~11.0.0",
+    "@angular/forms": "~11.0.0",
+    "@angular/platform-browser": "~11.0.0",
+    "@angular/platform-browser-dynamic": "~11.0.0",
+    "@angular/router": "~11.0.0",
+    "rxjs": "~6.6.0",
+    "tslib": "^2.0.0",
+    "zone.js": "~0.10.2"
+  },
+  "devDependencies": {
+    "@angular-devkit/build-angular": "^0.1100.1",
+    "@angular/cli": "~11.0.1",
+    "@angular/compiler-cli": "~11.0.0",
+    "@types/jasmine": "~3.6.0",
+    "@types/jasminewd2": "~2.0.3",
+    "@types/node": "^12.11.1",
+    "codelyzer": "^6.0.0",
+    "faker": "~5.1.0",
+    "husky": "~4.3.0",
+    "jasmine-core": "~3.6.0",
+    "jasmine-spec-reporter": "~5.0.0",
+    "karma": "~5.2.3",
+    "karma-chrome-launcher": "~3.1.0",
+    "karma-coverage-istanbul-reporter": "~3.0.2",
+    "karma-jasmine": "~4.0.0",
+    "karma-jasmine-html-reporter": "^1.5.0",
+    "lint-staged": "^10.4.0",
+    "ng-packagr": "^11.0.0",
+    "prettier": "~2.1.2",
+    "protractor": "~7.0.0",
+    "ts-node": "~9.0.0",
+    "tslint": "~6.1.3",
+    "typescript": "~4.0.3"
+  },
+  "lint-staged": {
+    "**/*.{js,ts,html,scss,css,json,md,yml}": [
+      "prettier --write"
+    ]
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "keywords": [
+    "RxJS-Debug",
+    "RxJS",
+    "Debug",
+    "Debugger",
+    "Log",
+    "Logger",
+    "Visualizer"
+  ]
+}
