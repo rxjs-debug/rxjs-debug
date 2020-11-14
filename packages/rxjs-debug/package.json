@@ -1,19 +1,19 @@
 {
   "name": "rxjs-debug",
-  "description": "Automated Visual RxJS Debugger",
+  "description": "Automated RxJS Visualizer",
   "version": "0.0.0",
   "peerDependencies": {
     "rxjs": "^6.0.0"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/dabalyan/rxjs-debug.git",
+    "url": "https://github.com/rxjs-debug/rxjs-debug.git",
     "directory": "packages/rxjs-debug"
   },
   "bugs": {
-    "url": "https://github.com/dabalyan/rxjs-debug/issues"
+    "url": "https://github.com/rxjs-debug/rxjs-debug/issues"
   },
-  "homepage": "https://github.com/dabalyan/rxjs-debug.git",
+  "homepage": "https://github.com/rxjs-debug/rxjs-debug.git",
   "license": "MIT",
   "author": "Ankit Singh <dabalyan@hotmail.com>",
   "keywords": [
