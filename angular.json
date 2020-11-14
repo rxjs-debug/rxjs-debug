@@ -24,7 +24,11 @@
             "polyfills": "projects/app/src/polyfills.ts",
             "tsConfig": "projects/app/tsconfig.app.json",
             "aot": true,
-            "assets": ["projects/app/src/favicon.ico", "projects/app/src/assets"],
+            "assets": [
+              "projects/app/src/favicon.png",
+              "projects/app/src/404.html",
+              "projects/app/src/assets"
+            ],
             "styles": ["projects/app/src/styles.scss"],
             "scripts": []
           },
@@ -82,7 +86,11 @@
             "polyfills": "projects/app/src/polyfills.ts",
             "tsConfig": "projects/app/tsconfig.spec.json",
             "karmaConfig": "projects/app/karma.conf.js",
-            "assets": ["projects/app/src/favicon.ico", "projects/app/src/assets"],
+            "assets": [
+              "projects/app/src/favicon.png",
+              "projects/app/src/404.html",
+              "projects/app/src/assets"
+            ],
             "styles": ["projects/app/src/styles.scss"],
             "scripts": []
           }

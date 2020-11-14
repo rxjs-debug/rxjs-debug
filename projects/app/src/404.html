@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="UTF-8" />
+    <script type="text/javascript">
+      var notFoundResource = location.pathname + location.search + location.hash;
+      var redirectUrl = 'https://rxjs-debug.github.io';
+
+      window.location.href = redirectUrl;
+      var anchor = document.querySelector('.redirect-link');
+      anchor.attributes.href = redirectUrl;
+    </script>
+    <title>RxJS-Debug 404 Redirect</title>
+  </head>
+  <body>
+    If you are not redirected automatically, follow
+    <a class="redirect-link" href="https://rxjs-debug.github.io">this link</a>.
+  </body>
+</html>

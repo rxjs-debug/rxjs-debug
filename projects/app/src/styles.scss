@@ -1,1 +1,27 @@
 /* You can add global styles to this file, and also import other style files */
+* {
+  box-sizing: border-box;
+  margin: 0;
+}
+
+html {
+  height: 100%;
+}
+
+body {
+  font-family: monospace, sans-serif;
+  font-weight: 300;
+  font-size: 14px;
+
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+  min-width: 320px;
+
+  background-color: #000;
+  color: #fff;
+
+  > * {
+    flex-shrink: 0; // safari fix
+  }
+}

@@ -1,0 +1,47 @@
+app-root {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+
+  > * {
+    flex-shrink: 0; // safari fix
+    transition: flex-grow 1s linear;
+  }
+
+  header {
+    display: flex;
+    padding: 12px;
+    align-items: center;
+
+    a {
+      color: white;
+      text-decoration: none;
+    }
+
+    .divider {
+      margin: 0 32px;
+    }
+
+    .branding {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      img {
+        width: 40px;
+        margin-right: 18px;
+      }
+    }
+  }
+
+  .stackblitz-container {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+
+    iframe {
+      flex: 1;
+      border: none;
+    }
+  }
+}
