@@ -1,0 +1,76 @@
+# rxjs-debug Release workflow
+
+name: rxjs-debug-Release
+
+on:
+  push:
+    branch: [master]
+    tags:
+      - '*'
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - uses: actions/setup-node@v1
+        with:
+          node-version: '12.x'
+
+      - uses: actions/cache@v2
+        id: node-modules-cache
+        env:
+          cache-name: rxjs-debug-ci-node-modules-cache
+        with:
+          path: '**/node_modules'
+          key: node-${{ hashFiles('**/package-lock.json') }}
+
+      - name: Install Dependencies
+        if: steps.node-modules-cache.outputs.cache-hit != 'true'
+        run: npm ci
+
+      - name: Lint
+        run: npm run lint:rxjs-debug
+
+      - name: Extract version tag
+        id: version-tag
+        run: echo ::set-output name=version::${GITHUB_REF#refs/tags/}
+
+      - name: Make sure the tag matches the npm version
+        run: npm --no-git-tag-version --allow-same-version version ${{ steps.version-tag.outputs.version }}
+
+      - name: Build rxjs-debug and Website
+        run: npm run build
+
+      - name: Test
+        run: npm run test:rxjs-debug
+
+      - name: Zip artifacts
+        run: |
+          cd dist
+          zip -r ${{ steps.version-tag.outputs.version }}.zip app rxjs-debug
+          cd ..
+
+      - name: Create Release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ steps.version-tag.outputs.version }}
+          release_name: ${{ steps.version-tag.outputs.version }}
+          draft: false
+          prerelease: false
+
+      - name: Upload Release Asset
+        id: upload-release-asset
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./dist/${{ steps.version-tag.outputs.version }}.zip
+          asset_name: ${{ steps.version-tag.outputs.version }}.zip
+          asset_content_type: application/zip

@@ -1,0 +1,47 @@
+# rxjs-debug CI workflow
+
+name: rxjs-debug-CI
+
+on:
+  push:
+    branches:
+      - master
+    paths:
+      - 'packages/rxjs-debug/**'
+  pull_request:
+    branches:
+      - master
+    paths:
+      - 'packages/rxjs-debug/**'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - uses: actions/setup-node@v1
+        with:
+          node-version: '12.x'
+
+      - uses: actions/cache@v2
+        id: node-modules-cache
+        env:
+          cache-name: rxjs-debug-ci-node-modules-cache
+        with:
+          path: '**/node_modules'
+          key: node-${{ hashFiles('**/package-lock.json') }}
+
+      - name: Install Dependencies
+        if: steps.node-modules-cache.outputs.cache-hit != 'true'
+        run: npm ci
+
+      - name: Lint
+        run: npm run lint:rxjs-debug
+
+      - name: Build
+        run: npm run build:rxjs-debug
+
+      - name: Test
+        run: npm run test:rxjs-debug
