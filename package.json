@@ -1,12 +1,12 @@
 {
   "name": "rxjs-debug",
-  "description": "Automated Visual RxJS Debugger",
+  "description": "Automated RxJS Visualizer",
   "version": "0.0.0",
   "repository": {
     "type": "git",
-    "url": "https://github.com/dabalyan/rxjs-debug.git"
+    "url": "https://github.com/rxjs-debug/rxjs-debug.git"
   },
-  "homepage": "https://github.com/dabalyan/rxjs-debug.git",
+  "homepage": "https://github.com/rxjs-debug/rxjs-debug.git",
   "license": "MIT",
   "author": "Ankit Singh <dabalyan@hotmail.com>",
   "scripts": {

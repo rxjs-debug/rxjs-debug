@@ -1,27 +1,70 @@
-# RxjsDebug
+<p align="center">
+    <a href="https://rxjs-debug.github.io">
+        <img width="700px" src="https://raw.githubusercontent.com/rxjs-debug/rxjs-debug/master/static/rxjs-debug-banner-shadow.svg"/>
+    </a>
+    <br/>
+    <b>Automated RxJS Visualizer</b><br><br>
+    <a aria-label="MIT license" href="https://github.com/rxjs-debug/rxjs-debug/blob/master/LICENSE">
+        <img src="https://img.shields.io/badge/License-MIT-blue.svg?style=flat-square&color=420690&labelColor=000">
+    </a>
+    <a aria-label="npm version" href="https://www.npmjs.com/package/rxjs-debug">
+        <img src="https://img.shields.io/npm/v/rxjs-debug?style=flat-square&color=420690&labelColor=000">
+    </a>
+    <a aria-label="Discord chat" href="https://discord.gg/bw8juJEqu3">
+        <img src="https://img.shields.io/badge/chat-discord-blue.svg?style=flat-square&color=420690&labelColor=000">
+    </a>
+    <a aria-label="PRs welcome" href="http://makeapullrequest.com">
+        <img src="https://img.shields.io/badge/PRs-welcome-blue.svg?style=flat-square&color=420690&labelColor=000">
+    </a>
+</p>
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 10.1.7.
+```shell script
+npm i rxjs-debug
+```
 
-## Development server
+### Introduction
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+RxJS-Debug provides a single utility function to debug complicated RxJS streams.
+It visualizes the piped-operators, subscriptions and completion.
 
-## Code scaffolding
+### 🤾 [Playground](https://rxjs-debug.github.io)
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+### ⚡ Example
 
-## Build
+The utility function `$D` is the only API that RxJS-Debug has.
+You can wrap an `Observable` with it and enable automated logging without any extra effort.
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+```typescript
+// a simple observable
+const source = of(1);
 
-## Running unit tests
+// wrap it with rxjs-debug
+// you can also provide an optional id to identify the Observable
+$D(source, {id: 'Special'}) // same Observable with logging enabled
+  // apply operators on it (optional)
+  .pipe(
+    map(x => x + 5),
+    switchMap(x => of(x * 2)),
+    delay(200)
+  )
+  .subscribe(); // activate the stream
+```
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+This is what you'd get in the console
 
-## Running end-to-end tests
+<img src="https://raw.githubusercontent.com/rxjs-debug/rxjs-debug/master/static/readme-example-output.png"/>
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+You can try it out [here](https://rxjs-debug.github.io?file=basic-example.ts).
 
-## Further help
+### 🤝 Contributing
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+We welcome all contributions, whether you're reporting an issue, helping us fix bugs,
+improve the docs, or spread the word. We also welcome your suggestions and feedback.
+
+### ⚖ Licence
+
+[MIT](https://github.com/rxjs-debug/rxjs-debug/blob/master/LICENSE)
+
+### 💻 Author
+
+[Ankit Singh](https://twitter.com/AlionBalyan)
