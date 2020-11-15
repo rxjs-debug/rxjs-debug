@@ -1,5 +1,5 @@
 import {Observable, Subscription, throwError} from 'rxjs';
-import {catchError, tap} from 'rxjs/operators';
+import {catchError, delay, tap} from 'rxjs/operators';
 import {Logger} from './logger';
 import {DebuggerOptions} from './models';
 
@@ -69,6 +69,13 @@ export function $D<T>($: Observable<T>, options?: DebuggerOptions): Observable<T
       });
 
       operators.splice(i + i, 0, tapper);
+    }
+    if (typeof options.addDelay === 'number') {
+      const delayer = delay(options.addDelay);
+      const totalInjections = operators.length;
+      for (let i = 0; i < totalInjections; i++) {
+        operators.splice(i + i, 0, delayer);
+      }
     }
     operators.push(
       catchError(err => {

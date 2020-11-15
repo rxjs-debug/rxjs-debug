@@ -14,4 +14,10 @@ export interface DebuggerOptions {
    * This can be helpful if you just want to see how far does the stream go.
    */
   hideOutputs?: boolean;
+  /**
+   * To add a fixed delay before every operator, to slow down the execution of the stream.
+   * Note: it uses `delay` operator to add the delay, hence it'll make the stream asynchronous.
+   * Note: the delay is in `ms`.
+   */
+  addDelay?: number;
 }
