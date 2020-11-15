@@ -8,6 +8,7 @@ export class Logger {
   private readonly endMsg: string;
   private readonly subscriptionMsg: string;
   private readonly completedMsg: string;
+  private readonly erroredMsg: string;
   private readonly basePad: number;
   private readonly pad: number;
 
@@ -25,6 +26,7 @@ export class Logger {
     this.startMsg = debuggerId + ' >> START';
     this.endMsg = debuggerId + ' >> END';
     this.subscriptionMsg = debuggerId + ' >> SUBSCRIBED';
+    this.erroredMsg = debuggerId + ' >> ERRORED';
     this.completedMsg = debuggerId + ' >> COMPLETED';
     this.basePad = 7;
     this.pad =
@@ -101,11 +103,16 @@ export class Logger {
     this.subCount++;
     this.subCountMsg = this.subCount > 1 ? `S:${this.subCount}` : '';
     const msg = this.subscriptionMsg.padEnd(this.basePad + this.pad, '-');
-    console.log('\n' + msg + this.subCountMsg.padStart(4, '-') + '---\n\n');
+    console.log('\n' + msg + this.subCountMsg.padStart(4, '-') + '--▼\n\n');
+  }
+
+  logErrored(): void {
+    const msg = this.erroredMsg.padEnd(this.basePad + this.pad, '-');
+    console.log('\n' + msg + this.subCountMsg.padStart(4, '-') + '--▲\n\n');
   }
 
   logCompleted(): void {
     const msg = this.completedMsg.padEnd(this.basePad + this.pad, '-');
-    console.log('\n' + msg + this.subCountMsg.padStart(4, '-') + '---\n\n');
+    console.log('\n' + msg + this.subCountMsg.padStart(4, '-') + '--▲\n\n');
   }
 }

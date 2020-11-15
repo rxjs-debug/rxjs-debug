@@ -1,5 +1,5 @@
-import {Observable, Subscription} from 'rxjs';
-import {finalize, tap} from 'rxjs/operators';
+import {Observable, Subscription, throwError} from 'rxjs';
+import {catchError, tap} from 'rxjs/operators';
 import {Logger} from './logger';
 import {DebuggerOptions} from './models';
 
@@ -68,9 +68,15 @@ export function $D<T>($: Observable<T>, options?: DebuggerOptions): Observable<T
         }
       });
 
-      operators.splice(i === 0 ? i : i + i, 0, tapper);
+      operators.splice(i + i, 0, tapper);
     }
-    operators.push(finalize(() => logger.logCompleted()));
+    operators.push(
+      catchError(err => {
+        logger.logErrored();
+        return throwError(err);
+      })
+    );
+    operators.push(tap({complete: () => logger.logCompleted()}));
 
     return ogPipe.apply(this, operators);
   };

@@ -1,5 +1,5 @@
 import {Observable, of, Subscription} from 'rxjs';
-import {map} from 'rxjs/operators';
+import {map, tap} from 'rxjs/operators';
 import {$D} from '../lib/debugger';
 import createSpy = jasmine.createSpy;
 
@@ -78,5 +78,43 @@ describe('RxJS Debugger', () => {
 
     expect(endMsg).toContain('END');
     expect(completedMsg).toContain('COMPLETED');
+  });
+
+  it('should log ERRORED with error pass-through', () => {
+    const spy = createSpy();
+    const errorSpy = createSpy();
+    const subscription = d$
+      .pipe(
+        map(x => x + 10),
+        tap(() => {
+          throw Error('22');
+        })
+      )
+      .subscribe(spy, errorSpy);
+
+    expect(spy).not.toHaveBeenCalled();
+    expect(errorSpy.calls.allArgs()[0][0].message).toBe('22');
+    expect(consoleSpy).toHaveBeenCalledTimes(5);
+
+    const [
+      [subscribedMsg],
+      [startMsg],
+      [sourceIndexAndName, sourceStyle, sourceValue],
+      [mapIndexAndName, mapStyle, mapValue],
+      [completedMsg],
+    ] = consoleSpy.calls.allArgs();
+
+    expect(subscribedMsg).toContain('SUBSCRIBED');
+    expect(startMsg).toContain('START');
+
+    expect(sourceIndexAndName).toContain('%c 0 source');
+    expect(sourceStyle).toContain('color: rgb');
+    expect(sourceValue).toBe(1);
+
+    expect(mapIndexAndName).toContain('%c 1 map');
+    expect(mapStyle).toContain('color: rgb');
+    expect(mapValue).toBe(11);
+
+    expect(completedMsg).toContain('ERRORED');
   });
 });
