@@ -12,7 +12,7 @@ export class AppComponent implements AfterViewInit {
 
   ngAfterViewInit(): void {
     sdk.embedProjectId(this.stackBlitzHost.nativeElement, 'rxjs-debug-playground', {
-      openFile: new URLSearchParams(location.search).get('file') || 'index.ts',
+      openFile: 'index.ts',
       view: 'both',
       theme: 'dark',
       width: '100%',

@@ -54,7 +54,7 @@ This is what you'd get in the console
 
 <img src="https://raw.githubusercontent.com/rxjs-debug/rxjs-debug/master/static/readme-example-output.png"/>
 
-You can try it out [here](https://rxjs-debug.github.io?file=basic-example.ts).
+You can try it out [here](https://rxjs-debug.github.io).
 
 ### 🤝 Contributing
 
