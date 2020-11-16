@@ -40,7 +40,7 @@ const source = of(1);
 
 // wrap it with rxjs-debug
 // you can also provide an optional id to identify the Observable
-$D(source, {id: 'Special'}) // same Observable with logging enabled
+$D(source, {id: 'Special'}) // returns a copy of the original Observable with logging enabled
   // apply operators on it (optional)
   .pipe(
     map(x => x + 5),
