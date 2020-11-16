@@ -14,8 +14,9 @@ describe('RxJS Debugger', () => {
     consoleSpy = spyOn(console, 'log');
   });
 
-  it('should return the same Observable instance', () => {
-    expect(d$).toBe($);
+  it('should return a new Observable with original as its source', () => {
+    expect(d$).not.toBe($);
+    expect(d$.source).toBe($);
     expect(consoleSpy).not.toHaveBeenCalled();
   });
 
