@@ -1,7 +1,7 @@
 {
   "name": "rxjs-debug",
   "description": "Automated RxJS Visualizer",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "repository": {
     "type": "git",
     "url": "https://github.com/rxjs-debug/rxjs-debug.git"
