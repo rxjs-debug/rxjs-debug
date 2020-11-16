@@ -10,7 +10,7 @@ app-root {
 
   header {
     display: flex;
-    padding: 12px;
+    padding: 4px 0;
     align-items: center;
 
     a {
@@ -18,18 +18,14 @@ app-root {
       text-decoration: none;
     }
 
-    .divider {
-      margin: 0 32px;
-    }
-
     .branding {
       display: flex;
       justify-content: center;
       align-items: center;
+      margin: 0 24px;
 
       img {
-        width: 40px;
-        margin-right: 18px;
+        height: 50px;
       }
     }
   }
