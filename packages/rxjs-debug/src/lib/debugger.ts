@@ -52,7 +52,7 @@ export function $D<T>($: Observable<T>, options?: DebuggerOptions): Observable<T
   let logger: Logger;
 
   $.pipe = function (...operators: any): Observable<T> {
-    logger = new Logger(debuggerId, operators, options.hideOutputs);
+    logger = new Logger(debuggerId, operators, options.hideOutputs, options.noStyling);
     const injections = logger.operatorNames.length;
 
     for (let i = 0; i < injections; i++) {

@@ -20,4 +20,12 @@ export interface DebuggerOptions {
    * Note: the delay is in `ms`.
    */
   addDelay?: number;
+  /**
+   * If set to `true`, the styling is disabled.
+   * It can be useful if you're not using the browser console.
+   * e.g.: when running unit tests in the terminal
+   * Because only the browser understands the extra styling passed to console.log,
+   * normal terminals will just print the raw styles.
+   */
+  noStyling?: boolean;
 }

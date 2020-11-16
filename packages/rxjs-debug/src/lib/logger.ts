@@ -22,7 +22,12 @@ export class Logger {
   private subCount = 0;
   private subCountMsg: string;
 
-  constructor(readonly debuggerId: string, operators: any[], private hideOutputs: boolean) {
+  constructor(
+    readonly debuggerId: string,
+    operators: any[],
+    private hideOutputs: boolean,
+    private noStyling: boolean
+  ) {
     this.startMsg = debuggerId + ' >> START';
     this.endMsg = debuggerId + ' >> END';
     this.subscriptionMsg = debuggerId + ' >> SUBSCRIBED';
@@ -46,7 +51,7 @@ export class Logger {
 
   logStart(): void {
     const msg = this.startMsg.padEnd(this.basePad + this.pad, '_');
-    console.log('\n\n' + msg + this.subCountMsg.padStart(4, '_') + '__▽');
+    console.log((this.noStyling ? '' : '\n\n') + msg + this.subCountMsg.padStart(4, '_') + '__▽');
   }
 
   logResume(): void {
@@ -56,13 +61,13 @@ export class Logger {
         lastLogOperatorExecCountMsg !== this.currentOperatorExecCountMsg)
     ) {
       const msg = this.debuggerId.padEnd(this.basePad + this.pad, '_');
-      console.log('\n\n' + msg + this.subCountMsg.padStart(4, '_') + '___');
+      console.log((this.noStyling ? '' : '\n\n') + msg + this.subCountMsg.padStart(4, '_') + '___');
     }
   }
 
   logEnd(): void {
     const msg = this.endMsg.padEnd(this.basePad + this.pad, '‾');
-    console.log(msg + this.subCountMsg.padStart(4, '‾') + '‾‾△' + '\n\n\n');
+    console.log(msg + this.subCountMsg.padStart(4, '‾') + '‾‾△' + (this.noStyling ? '' : '\n\n\n'));
   }
 
   logOperator(opIndex: number, value): void {
@@ -74,8 +79,10 @@ export class Logger {
       .padEnd(this.longestOperatorExecCountMsgLen + 1, ' ');
 
     console.log(
-      '%c' + paddedIndexAndName + paddedExecCountMsg,
-      `color: ${COLORS_BY_OPERATOR[opName]}; background-color: #000; padding: 3px; border-radius: 6px;`,
+      (this.noStyling ? '' : '%c') + paddedIndexAndName + paddedExecCountMsg,
+      this.noStyling
+        ? ''
+        : `color: ${COLORS_BY_OPERATOR[opName]}; background-color: #000; padding: 3px; border-radius: 6px;`,
       this.hideOutputs === true ? '' : value
     );
 
@@ -103,16 +110,34 @@ export class Logger {
     this.subCount++;
     this.subCountMsg = this.subCount > 1 ? `S:${this.subCount}` : '';
     const msg = this.subscriptionMsg.padEnd(this.basePad + this.pad, '-');
-    console.log('\n' + msg + this.subCountMsg.padStart(4, '-') + '--▼\n\n');
+    console.log(
+      (this.noStyling ? '' : '\n') +
+        msg +
+        this.subCountMsg.padStart(4, '-') +
+        '--▼' +
+        (this.noStyling ? '' : '\n\n')
+    );
   }
 
   logErrored(): void {
     const msg = this.erroredMsg.padEnd(this.basePad + this.pad, '-');
-    console.log('\n' + msg + this.subCountMsg.padStart(4, '-') + '--▲\n\n');
+    console.log(
+      (this.noStyling ? '' : '\n') +
+        msg +
+        this.subCountMsg.padStart(4, '-') +
+        '--▲' +
+        (this.noStyling ? '' : '\n\n')
+    );
   }
 
   logCompleted(): void {
     const msg = this.completedMsg.padEnd(this.basePad + this.pad, '-');
-    console.log('\n' + msg + this.subCountMsg.padStart(4, '-') + '--▲\n\n');
+    console.log(
+      (this.noStyling ? '' : '\n') +
+        msg +
+        this.subCountMsg.padStart(4, '-') +
+        '--▲' +
+        (this.noStyling ? '' : '\n\n')
+    );
   }
 }
