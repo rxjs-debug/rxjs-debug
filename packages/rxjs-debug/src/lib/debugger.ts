@@ -6,7 +6,7 @@ import {DebuggerOptions} from './models';
 let debuggersCount = 0;
 
 /**
- * RxJS-debugger wrapper function, to enable automated logging for Observables and Streams.
+ * RxJS-Debug wrapper function, to enable automated logging for Observables and Streams.
  *
  * When an Observable is wrapped with this function,
  * it returns the same Observable after injecting the logging hooks into it.
@@ -37,7 +37,8 @@ let debuggersCount = 0;
  * ```
  *
  * @param $ The Observable that needs to be debugged.
- * @param options Configuration options for RxJS-debugger instance.
+ * @param options Configuration options for RxJS-Debug instance.
+ * @returns A copy of the passed Observable, with logging enabled.
  */
 export function $D<T>($: Observable<T>, options?: DebuggerOptions): Observable<T> {
   const d$ = new Observable<T>();

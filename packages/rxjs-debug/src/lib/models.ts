@@ -1,11 +1,11 @@
 /**
- * Configuration Options for a RxJS-debugger instance.
+ * Configuration Options for an RxJS-Debug instance.
  */
 export interface DebuggerOptions {
   /**
-   * Optional id for the RxJS-debugger instance.
+   * Optional id for the RxJS-Debug instance.
    * If not provided, an automatic incremental `number` is used as the id.
-   * e.g: First debugger without custom id will have `1` as id,
+   * e.g: First RxJS-Debug instance without custom id will have `1` as id,
    * then second one will hve `2` as id, and so on.
    */
   id?: number | string;

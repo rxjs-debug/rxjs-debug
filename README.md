@@ -56,6 +56,11 @@ This is what you'd get in the console
 
 You can try it out [here](https://rxjs-debug.github.io).
 
+### ✍ Notes
+
+Please don't leave the `$D` in your production code/build, `rxjs-debug` is only meant to be used during development.
+You should keep the `rxjs-debug` in your `devDependencies` and just use `$D` whenever you need it (for debugging).
+
 ### 🤝 Contributing
 
 We welcome all contributions, whether you're reporting an issue, helping us fix bugs,
