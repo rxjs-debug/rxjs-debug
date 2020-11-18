@@ -32,5 +32,5 @@ export interface DebuggerOptions {
    * If set to `true`, logging will be disabled
    * e.g.: you might not want to log streams if you are in production environment
    */
-  production?: boolean;  
+  production?: boolean;
 }

@@ -40,6 +40,10 @@ let debuggersCount = 0;
  * @param options Configuration options for RxJS-debugger instance.
  */
 export function $D<T>($: Observable<T>, options?: DebuggerOptions): Observable<T> {
+  if (options.production) {
+    return $;
+  }
+
   const d$ = new Observable<T>();
   d$.source = $;
   $ = d$;
