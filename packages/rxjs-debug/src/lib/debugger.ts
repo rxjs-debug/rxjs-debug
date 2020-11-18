@@ -40,6 +40,8 @@ let debuggersCount = 0;
  * @param options Configuration options for RxJS-debugger instance.
  */
 export function $D<T>($: Observable<T>, options?: DebuggerOptions): Observable<T> {
+  options = options || {};
+
   if (options.production) {
     return $;
   }
@@ -48,7 +50,6 @@ export function $D<T>($: Observable<T>, options?: DebuggerOptions): Observable<T
   d$.source = $;
   $ = d$;
 
-  options = options || {};
   const debuggerId: string = String(options.id ?? ++debuggersCount);
 
   const ogSubscribe = $.subscribe;
