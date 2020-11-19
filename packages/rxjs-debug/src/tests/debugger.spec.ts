@@ -37,6 +37,8 @@ describe('RxJS Debugger', () => {
       [completedMsg],
     ] = consoleSpy.calls.allArgs();
 
+    consoleSpy.calls.allArgs().forEach(([firstArg]) => expect(firstArg).toContain('➰ '));
+
     expect(subscribedMsg).toContain('SUBSCRIBED');
     expect(startMsg).toContain('START');
 
@@ -66,6 +68,8 @@ describe('RxJS Debugger', () => {
       [completedMsg],
     ] = consoleSpy.calls.allArgs();
 
+    consoleSpy.calls.allArgs().forEach(([firstArg]) => expect(firstArg).toContain('➰ '));
+
     expect(subscribedMsg).toContain('SUBSCRIBED');
     expect(startMsg).toContain('START');
 
@@ -93,6 +97,7 @@ describe('RxJS Debugger', () => {
       )
       .subscribe(spy, errorSpy);
 
+    expect(subscription).toBeInstanceOf(Subscription);
     expect(spy).not.toHaveBeenCalled();
     expect(errorSpy.calls.allArgs()[0][0].message).toBe('22');
     expect(consoleSpy).toHaveBeenCalledTimes(5);
@@ -104,6 +109,8 @@ describe('RxJS Debugger', () => {
       [mapIndexAndName, mapStyle, mapValue],
       [completedMsg],
     ] = consoleSpy.calls.allArgs();
+
+    consoleSpy.calls.allArgs().forEach(([firstArg]) => expect(firstArg).toContain('➰ '));
 
     expect(subscribedMsg).toContain('SUBSCRIBED');
     expect(startMsg).toContain('START');

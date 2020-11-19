@@ -2,6 +2,7 @@ import {COLORS_BY_OPERATOR, OPERATORS_BY_RETURNED_FN_BODY} from './meta';
 
 let lastLogDebuggerId: string;
 let lastLogOperatorExecCountMsg: string;
+const PREFIX = '➰ ';
 
 export class Logger {
   private readonly startMsg: string;
@@ -51,7 +52,7 @@ export class Logger {
 
   logStart(): void {
     const msg = this.startMsg.padEnd(this.basePad + this.pad, '_');
-    console.log((this.noStyling ? '' : '\n\n') + msg + this.subCountMsg.padStart(4, '_') + '__▽');
+    console.log(this.newLines(2) + PREFIX + msg + this.subCountMsg.padStart(4, '_') + '__▽');
   }
 
   logResume(): void {
@@ -61,13 +62,13 @@ export class Logger {
         lastLogOperatorExecCountMsg !== this.currentOperatorExecCountMsg)
     ) {
       const msg = this.debuggerId.padEnd(this.basePad + this.pad, '_');
-      console.log((this.noStyling ? '' : '\n\n') + msg + this.subCountMsg.padStart(4, '_') + '___');
+      console.log(this.newLines(2) + PREFIX + msg + this.subCountMsg.padStart(4, '_') + '___');
     }
   }
 
   logEnd(): void {
     const msg = this.endMsg.padEnd(this.basePad + this.pad, '‾');
-    console.log(msg + this.subCountMsg.padStart(4, '‾') + '‾‾△' + (this.noStyling ? '' : '\n\n\n'));
+    console.log(PREFIX + msg + this.subCountMsg.padStart(4, '‾') + '‾‾△' + this.newLines(3));
   }
 
   logOperator(opIndex: number, value): void {
@@ -79,7 +80,7 @@ export class Logger {
       .padEnd(this.longestOperatorExecCountMsgLen + 1, ' ');
 
     console.log(
-      (this.noStyling ? '' : '%c') + paddedIndexAndName + paddedExecCountMsg,
+      PREFIX + (this.noStyling ? '' : '%c') + paddedIndexAndName + paddedExecCountMsg,
       this.noStyling
         ? ''
         : `color: ${COLORS_BY_OPERATOR[opName]}; background-color: #000; padding: 3px; border-radius: 6px;`,
@@ -111,33 +112,25 @@ export class Logger {
     this.subCountMsg = this.subCount > 1 ? `S:${this.subCount}` : '';
     const msg = this.subscriptionMsg.padEnd(this.basePad + this.pad, '-');
     console.log(
-      (this.noStyling ? '' : '\n') +
-        msg +
-        this.subCountMsg.padStart(4, '-') +
-        '--▼' +
-        (this.noStyling ? '' : '\n\n')
+      this.newLines(1) + PREFIX + msg + this.subCountMsg.padStart(4, '-') + '--▼' + this.newLines(2)
     );
   }
 
   logErrored(): void {
     const msg = this.erroredMsg.padEnd(this.basePad + this.pad, '-');
     console.log(
-      (this.noStyling ? '' : '\n') +
-        msg +
-        this.subCountMsg.padStart(4, '-') +
-        '--▲' +
-        (this.noStyling ? '' : '\n\n')
+      this.newLines(1) + PREFIX + msg + this.subCountMsg.padStart(4, '-') + '--▲' + this.newLines(2)
     );
   }
 
   logCompleted(): void {
     const msg = this.completedMsg.padEnd(this.basePad + this.pad, '-');
     console.log(
-      (this.noStyling ? '' : '\n') +
-        msg +
-        this.subCountMsg.padStart(4, '-') +
-        '--▲' +
-        (this.noStyling ? '' : '\n\n')
+      this.newLines(1) + PREFIX + msg + this.subCountMsg.padStart(4, '-') + '--▲' + this.newLines(2)
     );
+  }
+
+  private newLines(n: number): string {
+    return this.noStyling ? '' : Array(n).fill('\n').join('');
   }
 }
