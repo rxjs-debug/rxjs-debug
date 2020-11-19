@@ -13,9 +13,6 @@
     <a aria-label="Discord chat" href="https://discord.gg/bw8juJEqu3">
         <img src="https://img.shields.io/badge/chat-discord-blue.svg?style=flat-square&color=420690&labelColor=000">
     </a>
-    <a aria-label="PRs welcome" href="http://makeapullrequest.com">
-        <img src="https://img.shields.io/badge/PRs-welcome-blue.svg?style=flat-square&color=420690&labelColor=000">
-    </a>
 </p>
 
 ```shell script
@@ -63,8 +60,8 @@ You should keep the `rxjs-debug` in your `devDependencies` and just use `$D` whe
 
 ### 🤝 Contributing
 
-We welcome all contributions, whether you're reporting an issue, helping us fix bugs,
-improve the docs, or spread the word. We also welcome your suggestions and feedback.
+We appreciate your help with reporting issues and fixing bugs.
+We also welcome your suggestions and feedback.
 
 ### ⚖ Licence
 
